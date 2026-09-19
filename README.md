@@ -23,7 +23,7 @@ npx skills add modenicheng/repo-steward
 
 ## Included workflows
 
-[SKILL.md](SKILL.md) defines quick and full stewardship passes and routes tasks to focused guidance. The [documentation workflow](references/docs-maintenance.md) owns documentation maintenance; the [change gate](references/change-gate.md) owns validation, independent review, and finding closure.
+[SKILL.md](SKILL.md) defines quick and full stewardship passes and routes tasks to focused guidance. The [documentation workflow](references/docs-maintenance.md) owns documentation maintenance; the [change gate](references/change-gate.md) owns acceptance evidence, validation, review, and finding closure.
 
 The bundled Python scripts use only the standard library and collect evidence rather than making destructive decisions. Run these from the skill directory, passing the target repository path:
 

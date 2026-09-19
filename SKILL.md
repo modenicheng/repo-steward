@@ -40,19 +40,19 @@ Choose a pass depth without expanding the agreed task boundary:
 
 | Pass | When | Coverage |
 |---|---|---|
-| Quick | After a few related tasks (typically 3-4), or a substantial edit | Relevant checks, changed-code structure, and every new file; inspect affected canonical docs. |
-| Full | Milestone, phase, or PR-batch closeout; explicit hygiene audit | Quick coverage plus contracts, dependency direction, configuration, and documentation consistency across the agreed scope; independent review via `references/change-gate.md`. |
+| Quick | Before handoff after a substantial or cross-cutting edit, or when a focused hygiene check is requested | Relevant checks, changed-code structure, every new file, and affected canonical docs. |
+| Full | Milestone or phase closeout, broad cleanup, PR-batch closeout, or explicit hygiene audit | Quick coverage plus contracts, dependency direction, configuration, and documentation consistency across the agreed scope; use independent review for broad or high-risk work when available. |
 
 For either pass:
 
 1. Read local rules: `AGENTS.md`, `CONTRIBUTING.md`, manifests, CI, formatter/linter configs, and relevant docs.
 2. Establish the change boundary: identify behavior, files, modules, or docs actually required.
-3. Inspect before editing: search for existing utilities, canonical docs, similar modules, and established naming.
-4. Establish a baseline: discover authoritative test, typecheck, and build commands from repository rules, manifests, and CI rather than assuming a package manager. Run the narrowest useful checks before structural work; record pre-existing failures or unavailable checks.
-5. Make the smallest coherent change.
+3. Inspect before editing: search for existing utilities, canonical docs, similar modules, and established naming. Resolve material ambiguity from repository evidence first. Ask only when unresolved alternatives materially change behavior, compatibility, or scope; use established low-impact defaults otherwise. Recommend a simpler approach when it meets the same requirements.
+4. Define observable success using `references/change-gate.md#acceptance-evidence`. For non-trivial multi-step work, pair significant implementation steps with corresponding verification in the working plan. Discover authoritative test, typecheck, and build commands from repository rules, manifests, and CI; run the narrowest useful baseline checks and record pre-existing failures or unavailable checks.
+5. Make the smallest coherent change, following surrounding style and conventions. Do not add options, extension points, configuration, or fallback paths for hypothetical requirements; retain error handling justified by real inputs, trust boundaries, or supported contracts.
 6. Check entropy: ask whether the change added unnecessary files, concepts, dependencies, comments, docs, or duplicated facts.
 7. Validate and close findings using `references/change-gate.md`: targeted tests first, broader checks when warranted. A full pass also loads the code-structure and documentation guidance above.
-8. Inspect the diff: remove accidental churn, temporary artifacts, debug output, unrelated formatting, and stale docs.
+8. Inspect the diff: remove accidental churn, temporary artifacts, debug output, unrelated formatting, stale docs, and code made unused by this change.
 9. Report compactly: state what changed, what was validated, and remaining risks. Do not generate a second implementation report unless requested.
 
 ## Deterministic helpers
