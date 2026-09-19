@@ -1,0 +1,3 @@
+interface:
+  display_name: "Repo Steward"
+  short_description: "Keep repositories lean, coherent, and documentation-current."

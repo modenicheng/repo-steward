@@ -1,0 +1,14 @@
+[scan]
+large_file_bytes = 1048576
+root_file_warn = 20
+warn_lines = 600
+high_lines = 1000
+ignore_paths = []
+
+# [docs."README.md"]
+# sources = ["pyproject.toml", "src/cli/**"]
+# concerns = ["install", "entrypoints", "basic usage"]
+#
+# [docs."docs/architecture.md"]
+# sources = ["src/**", "migrations/**"]
+# concerns = ["module boundaries", "data flow", "persistence"]
