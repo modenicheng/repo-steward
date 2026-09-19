@@ -17,6 +17,18 @@ Investigate:
 - deep conditionals that encode a state machine implicitly
 - abstractions with one implementation and no real boundary pressure
 - wrappers whose only purpose is to rename another function
+- repeated validation or derivation of the same data, including hand-written checks already guaranteed by a schema validator
+- silent internal fallbacks or swallowed errors that hide broken invariants; validate at trust boundaries and express internal guarantees with types or assertions where appropriate
+- parallel replacement implementations or compatibility parameters added only to avoid updating old callers; preserve compatibility when it is a real supported contract
+
+## State, contracts, and dependency direction
+
+For a full pass, or changes touching these boundaries:
+
+- Identify the authoritative owner of state, events, configuration, and derived data. A cache or projection is legitimate when its derivation and invalidation are clear; competing writable authorities are a finding, not every duplicate representation.
+- Check declared schema/API/protocol compatibility rules before changing a frozen contract. Require the repository's approval, versioning, and migration process; do not silently turn cleanup into a breaking change.
+- Check the repository's architecture tests, import rules, or documented layering. Ensure new directories are covered by those checks; when no automation exists, inspect representative imports across the affected boundary.
+- When removing a capability, remove obsolete configuration keys and consumers within the supported compatibility policy. Ensure new keys have readers and documented defaults or explicit required-value validation.
 
 ## Baseline first
 
@@ -30,6 +42,8 @@ Before structural changes, establish behavior with existing tests, a focused reg
 4. Introduce interfaces/traits/protocols only when a real boundary needs them.
 5. Move shared code only after two or more callers demonstrate stable shared behavior.
 6. Re-run focused tests after each coherent step.
+
+When a structural prerequisite enables a behavior change, separate the move/refactor from the behavior change into reviewable steps, and separate commits when appropriate. Align tests with the new responsibility boundaries when splitting modules; keep shared integration coverage where it still tests a cohesive workflow.
 
 ## Anti-overengineering gate
 

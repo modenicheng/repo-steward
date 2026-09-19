@@ -5,10 +5,12 @@ Use this workflow to find physical repository clutter and accidental artifacts.
 ## Inspect
 
 1. Identify the repository root and local ignore rules.
-2. List tracked files before reasoning from the working tree. A generated file that is ignored is different from one already committed.
+2. List tracked files and non-ignored untracked files separately (`git ls-files --others --exclude-standard`). Inspect new files before staging as well as the diff. A generated file that is ignored is different from one already committed.
 3. Inspect root-level files, large tracked files, likely secrets, caches, virtual environments, build outputs, logs, backups, temporary exports, notebook outputs, and duplicated generated artifacts.
 4. Check whether generated artifacts have a documented regeneration path.
 5. Separate source-controlled fixtures and snapshots from accidental outputs.
+
+In Git repositories, the inventory/scan helpers enumerate tracked files only; separately inspect untracked files rather than treating a clean scan as complete coverage. `repo_scan.py` supplies name, path, and size signals, not proof of provenance or safe deletion. Regeneration paths, fixture intent, and overlapping configuration still require inspection.
 
 ## Signals worth checking
 

@@ -23,9 +23,9 @@ npx skills add modenicheng/repo-steward
 
 ## Included workflows
 
-`SKILL.md` routes tasks to focused references instead of loading one giant policy document. The documentation workflow in `references/docs-maintenance.md` defines canonical ownership, source-backed drift checks, minimal updates, deduplication, and plan retirement.
+[SKILL.md](SKILL.md) defines quick and full stewardship passes and routes tasks to focused guidance. The [documentation workflow](references/docs-maintenance.md) owns documentation maintenance; the [change gate](references/change-gate.md) owns validation, independent review, and finding closure.
 
-The bundled Python scripts use only the standard library and collect evidence rather than making destructive decisions:
+The bundled Python scripts use only the standard library and collect evidence rather than making destructive decisions. Run these from the skill directory, passing the target repository path:
 
 ```bash
 python scripts/repo_scan.py /path/to/repo
@@ -35,20 +35,13 @@ python scripts/docs_drift.py /path/to/repo
 python scripts/diff_guard.py /path/to/repo --staged
 ```
 
-Optional `.repo-steward.toml` configuration maps durable documents to source-of-truth paths. Start from `assets/repo-steward.toml`.
+Git-backed scans cover tracked files; inspect untracked files separately. `diff_guard.py` checks unstaged changes by default and staged changes with `--staged`. Documentation drift checks use configured source mappings and Git history to suggest review candidates, not prove drift.
+
+Optional [configuration](references/configuration.md) defines scan thresholds and documentation ownership. Start from [the template](assets/repo-steward.toml).
 
 ## Design stance
 
-Repo Steward rejects several common AI coding failure modes:
-
-- splitting cohesive files only because they are long;
-- inventing interfaces and layers without actual pressure;
-- creating a new document for every task;
-- duplicating setup commands across README, AGENTS, and development docs;
-- rewriting unrelated files while “cleaning up”;
-- treating linter metrics as architecture decisions.
-
-The skill composes with repository-specific `AGENTS.md`, CI, linters, formatters, and test suites instead of replacing them.
+The [core principles](SKILL.md#core-principles) favor coherent responsibilities and canonical ownership over mechanical splitting or extra artifacts. The skill composes with repository-specific `AGENTS.md`, CI, linters, formatters, and test suites instead of replacing them.
 
 ## Test
 

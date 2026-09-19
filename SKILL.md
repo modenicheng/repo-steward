@@ -36,15 +36,22 @@ Load only the references needed for the task:
 
 ## Standard operating sequence
 
-For non-trivial repository work:
+Choose a pass depth without expanding the agreed task boundary:
+
+| Pass | When | Coverage |
+|---|---|---|
+| Quick | After a few related tasks (typically 3-4), or a substantial edit | Relevant checks, changed-code structure, and every new file; inspect affected canonical docs. |
+| Full | Milestone, phase, or PR-batch closeout; explicit hygiene audit | Quick coverage plus contracts, dependency direction, configuration, and documentation consistency across the agreed scope; independent review via `references/change-gate.md`. |
+
+For either pass:
 
 1. Read local rules: `AGENTS.md`, `CONTRIBUTING.md`, manifests, CI, formatter/linter configs, and relevant docs.
 2. Establish the change boundary: identify behavior, files, modules, or docs actually required.
 3. Inspect before editing: search for existing utilities, canonical docs, similar modules, and established naming.
-4. Establish a baseline: run the narrowest useful tests/checks before structural work when practical.
+4. Establish a baseline: discover authoritative test, typecheck, and build commands from repository rules, manifests, and CI rather than assuming a package manager. Run the narrowest useful checks before structural work; record pre-existing failures or unavailable checks.
 5. Make the smallest coherent change.
 6. Check entropy: ask whether the change added unnecessary files, concepts, dependencies, comments, docs, or duplicated facts.
-7. Validate: targeted tests first, broader checks when warranted.
+7. Validate and close findings using `references/change-gate.md`: targeted tests first, broader checks when warranted. A full pass also loads the code-structure and documentation guidance above.
 8. Inspect the diff: remove accidental churn, temporary artifacts, debug output, unrelated formatting, and stale docs.
 9. Report compactly: state what changed, what was validated, and remaining risks. Do not generate a second implementation report unless requested.
 

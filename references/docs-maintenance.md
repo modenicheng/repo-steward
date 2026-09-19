@@ -83,28 +83,22 @@ For completed plans, investigations, and implementation notes:
 
 Check:
 
-- links and referenced paths;
+- links and referenced paths, including document/section references in source comments;
 - commands that can be run cheaply;
 - renamed symbols and configuration keys;
 - examples affected by API changes;
 - duplicate facts across durable docs;
 - stale “planned”, “TODO”, “future”, or “not implemented” claims.
 
+Check progress pages and completed checklist items against tests or observed behavior, not memory. Record meaningful design deviations in the repository's existing decision mechanism and update current design docs when the system has changed; preserve historical decisions. Add new durable documents to the existing index/map when one exists, without creating an index just for this pass.
+
+`docs_inventory.py` checks local linked-file existence, not section anchors or references in source comments. Verify those separately. `docs_drift.py` flags mapped, tracked source files with uncommitted changes or newer Git commits; it neither covers untracked sources nor establishes factual correctness.
+
 ### 7. Record ownership only when useful
 
 For repositories with recurring drift, create `.repo-steward.toml` mapping docs to source paths. Do not add it to tiny repositories that do not need machine-assisted drift checks.
 
-Example:
-
-```toml
-[docs."README.md"]
-sources = ["pyproject.toml", "src/cli/**"]
-concerns = ["install", "entrypoints", "basic usage"]
-
-[docs."docs/architecture.md"]
-sources = ["src/**", "migrations/**"]
-concerns = ["module boundaries", "data flow", "persistence"]
-```
+Use the ownership format in [configuration.md](configuration.md#documentation-ownership) rather than maintaining another mapping format here.
 
 ## Documentation anti-patterns
 
