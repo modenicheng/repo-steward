@@ -13,6 +13,14 @@ The governing rule:
 
 > Prefer deleting, consolidating, or reusing over adding.
 
+## Install
+
+Install with the [skills.sh](https://skills.sh) CLI:
+
+```bash
+npx skills add modenicheng/repo-steward
+```
+
 ## Included workflows
 
 `SKILL.md` routes tasks to focused references instead of loading one giant policy document. The documentation workflow in `references/docs-maintenance.md` defines canonical ownership, source-backed drift checks, minimal updates, deduplication, and plan retirement.
