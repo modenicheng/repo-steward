@@ -40,9 +40,9 @@ For non-trivial repository work:
 
 1. Read local rules: `AGENTS.md`, `CONTRIBUTING.md`, manifests, CI, formatter/linter configs, and relevant docs.
 2. Establish the change boundary: identify behavior, files, modules, or docs actually required.
-3. Inspect before editing: search for existing utilities, canonical docs, similar modules, and established naming.
-4. Establish a baseline: run the narrowest useful tests/checks before structural work when practical.
-5. Make the smallest coherent change.
+3. Inspect before editing: search for existing utilities, canonical docs, similar modules, and established naming. State assumptions that affect scope or behavior. Resolve uncertainty from repository evidence first; if materially different interpretations remain, explain the tradeoff and ask for the decision rather than silently choosing. For low-impact details, use established defaults. Recommend a simpler approach when it meets the same requirements.
+4. Define observable success before editing, using `references/change-gate.md#acceptance-evidence`; for multi-step work, pair each step with its verification in a brief conversational plan, not a new report. Establish a baseline: run the narrowest useful tests/checks before structural work when practical.
+5. Make the smallest coherent change, following surrounding style and conventions. Do not add options, extension points, or fallback paths for hypothetical requirements; retain error handling justified by real inputs, trust boundaries, or supported contracts.
 6. Check entropy: ask whether the change added unnecessary files, concepts, dependencies, comments, docs, or duplicated facts.
 7. Validate: targeted tests first, broader checks when warranted.
 8. Inspect the diff: remove accidental churn, temporary artifacts, debug output, unrelated formatting, and stale docs.

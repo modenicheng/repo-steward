@@ -6,13 +6,26 @@ Use before commit, pull request, or handoff.
 
 Inspect changed files and ask:
 
-- Does every changed file serve the requested task?
+- Does each changed hunk serve the requested task or a necessary prerequisite?
 - Did formatting or generated output touch unrelated files?
 - Did a cleanup silently change behavior?
 - Did the change add temporary reports, logs, screenshots, dumps, or local config?
 - Did a rename leave stale references?
 
+Remove imports, variables, helpers, and references made unused by this change once their lack of remaining consumers is verified. Report pre-existing dead code outside the agreed scope rather than deleting it; an explicit cleanup task may include it, subject to the skill's cleanup safety rules.
+
 Prefer explicit staging over indiscriminate `git add .` when repository state contains unrelated work.
+
+## Acceptance evidence
+
+Turn the requested outcome into an observable check before implementation:
+
+- Bug repair: reproduce the reported failure with a focused test or command, then verify the repair against that same case.
+- Validation change: check invalid inputs are rejected and supported valid inputs still succeed.
+- Refactoring: establish equivalent behavior before and after, not merely a smaller file or a green unrelated suite.
+- Documentation change: verify the affected facts against their authoritative source and check changed links; passing code tests alone does not establish prose correctness.
+
+Use existing checks when they demonstrate the outcome; add focused coverage when they do not. After a failed check, investigate, make an in-scope correction, and rerun it. Do not weaken the criterion just to obtain a pass. If verification is unavailable or a repair needs a user decision, report the specific limitation rather than claiming completion.
 
 ## Validation order
 
